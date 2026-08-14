@@ -82,4 +82,14 @@ class OrderController extends Controller
             'data' => $order,
         ]);
     }
+
+    // 4. Show details of one order by ID
+    public function show(Order $order)
+    {
+        $order->load(['user', 'orderDetails.drink']);
+
+        return response()->json([
+            'data' => $order
+        ]);
+    }
 }
