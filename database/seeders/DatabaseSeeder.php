@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
        $this->call([
         StaffSeeder::class,
         CategoryAndDrinkSeeder::class,
+        OrderSeeder::class
        ]);
     }
 }

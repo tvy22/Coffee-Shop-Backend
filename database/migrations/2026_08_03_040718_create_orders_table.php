@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->string('order_type')->default('dine-in'); //takeaway, dine-in
-            $table->string('status')->default('pending'); //pending, preparing, completed
+            $table->string('status')->default('pending'); //pending, preparing, completed, cancelled
             $table->decimal('total', 8, 2);
             $table->dateTime('order_date');
             $table->timestamps();
