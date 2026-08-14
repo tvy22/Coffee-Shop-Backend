@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DrinkController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Route;
 
 //Public Routes
@@ -39,5 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus']);
     Route::get('/orders/{order}', [OrderController::class, 'show']);
     Route::get('/my-orders', [OrderController::class, 'myOrders']);
+
+    //Reports
+    Route::get('/reports/dashboard', [ReportController::class, 'dashboardOverview']);
+    Route::get('/reports/sales-trend', [ReportController::class, 'salesTrend']);
 });
 
