@@ -32,12 +32,12 @@ class OrderController extends Controller
             $totalAmount = 0;
             $orderDetailsData = [];
 
-            $drinkIds = collect($validated['items'])->pluch('drink_id');
+            $drinkIds = collect($validated['items'])->pluck('drink_id');
             $drinks = Drink::whereIn('id', $drinkIds)->get()->keyBy('id');
 
             foreach($validated['items'] as $item) {
                 $drink = $drinks[$item['drink_id']];
-                $subtotal = $drink->price * $item['quantity'];
+                $subtotal = $drink->unit_price * $item['quantity'];
                 $totalAmount += $subtotal;
 
                 $orderDetailsData[] = [
@@ -71,7 +71,7 @@ class OrderController extends Controller
     // 3. Update Order status (Pending -> Preparing -> Completed)
     public function updateStatus(Request $request, Order $order)
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'status' => 'required|in:pending,preparing,completed,cancelled',
         ]);
 

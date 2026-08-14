@@ -25,7 +25,7 @@ class StoreOrderRequest extends FormRequest
         return [
             'order_type' => 'required|string|in:dine_in,takeaway',
             'items'      => 'required|array|min:1',
-            'items.*.drink_id'  => 'required|exists:drink,id',
+            'items.*.drink_id'  => 'required|exists:drinks,id',
             'items.*.quantity'  => 'required|integer|min:1',
         ];
     }
