@@ -92,4 +92,27 @@ class OrderController extends Controller
             'data' => $order
         ]);
     }
+
+    // 5. Get authenticated user's order history
+    public function myOrders(Request $request)
+    {
+        $user = $request->user();
+        $totalOrdersCount = $user->orders()->count();
+
+        $orders = $request->user()
+            ->orders()
+            ->with('orderDetails.drink')
+            ->latest()
+            ->paginate(10);
+
+        return response()->json([
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+            ],
+            'total_orders_count' => $totalOrdersCount,
+            'orders' => $orders,
+        ]);
+    }
 }
